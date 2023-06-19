@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Objetos JavaScript</title>
+</head>
+<body>
+    <h1>Informações da Pessoa</h1> <!-- Título principal da página -->
+    <p id="nomeCompleto"></p> <!-- Elemento <p> para exibir o nome completo -->
+    <p id="idadePessoa"></p> <!-- Elemento <p> para exibir a idade -->
+
+    <!-- Campos para o usuário inserir os dados -->
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome">
+    <br>
+    <label for="sobrenome">Sobrenome:</label>
+    <input type="text" id="sobrenome">
+    <br>
+    <label for="idade">Idade:</label>
+    <input type="number" id="idade">
+    <br>
+    <button onclick="atualizarInformacoes()">Atualizar Informações</button>
+
+    <script>
+        // Definindo o objeto pessoa
+        const pessoa = {
+            nome: "João", // Propriedade para o nome
+            sobrenome: "Silva", // Propriedade para o sobrenome
+            idade: 30, // Propriedade para a idade
+
+            // Método para retornar o nome completo usando this
+            nomeCompleto: function () {
+                return this.nome + " " + this.sobrenome;
+            },
+
+            // Método para retornar a idade usando this
+            mostrarIdade: function () {
+                return "Idade: " + this.idade;
+            }
+        };
+
+        // Função para atualizar as informações com os dados inseridos pelo usuário
+        function atualizarInformacoes() {
+            const nomeInput = document.getElementById("nome");
+            const sobrenomeInput = document.getElementById("sobrenome");
+            const idadeInput = parseInt(document.getElementById("idade").value);
+
+            pessoa.nome = nomeInput.value;
+            pessoa.sobrenome = sobrenomeInput.value;
+            pessoa.idade = +document.getElementById("idade").value;
+
+            nomeInput.value = "";
+            sobrenomeInput.value = "";
+            idadeInput.value = "";
+
+            atualizarElementos();
+        }
+
+        // Função para atualizar os elementos HTML com as informações atualizadas da pessoa
+        function atualizarElementos() {
+            const nomeCompletoElemento = document.getElementById("nomeCompleto");
+            const idadeElemento = document.getElementById("idadePessoa");
+
+            nomeCompletoElemento.textContent = pessoa.nomeCompleto();
+            idadeElemento.textContent = pessoa.mostrarIdade();
+        }
+
+        // Atualizar elementos inicialmente
+        atualizarElementos();
+    </script>
+</body>
+</html>
